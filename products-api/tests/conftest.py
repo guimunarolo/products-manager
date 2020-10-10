@@ -3,6 +3,7 @@ import uuid
 import pytest
 from fastapi.testclient import TestClient
 
+from products_api.db import db_connect, db_disconnect
 from products_api.main import app
 
 
@@ -10,6 +11,12 @@ from products_api.main import app
 def client():
     with TestClient(app) as client:
         yield client
+
+@pytest.fixture
+async def db_connection():
+    await db_connect()
+    yield None
+    await db_disconnect()
 
 
 @pytest.fixture

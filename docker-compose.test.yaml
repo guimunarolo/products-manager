@@ -6,3 +6,20 @@ services:
     command: poetry run pytest
     volumes:
       - ./products-api:/app
+    depends_on:
+      - test_db
+    links:
+      - "test_db"
+    environment:
+      - DATABASE_URL=postgresql://postgres:root@test_db:5432/products_manager_test
+
+  test_db:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=products_manager_test
+    volumes:
+      - ./initial-db-data:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
