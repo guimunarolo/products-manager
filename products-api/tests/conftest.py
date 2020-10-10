@@ -15,8 +15,18 @@ def client():
 @pytest.fixture
 def user_data():
     return {
-        "id": uuid.uuid4(),
+        "id": str(uuid.uuid4()),
         "first_name": "Jane",
         "last_name": "Doe",
         "date_of_birth": "1999-09-09",
+    }
+
+
+@pytest.fixture
+def product_data():
+    return {
+        "id": str(uuid.uuid4()),
+        "price_in_cents": 120000,
+        "title": "Some Product",
+        "description": "Some product description here.",
     }
