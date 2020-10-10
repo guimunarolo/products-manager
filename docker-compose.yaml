@@ -10,6 +10,10 @@ services:
       - 8000:8000
     depends_on:
       - db
+    links:
+      - "db"
+    environment:
+      - DATABASE_URL=postgresql://postgres:root@db:5432/products_manager
 
   db:
     image: postgres:13-alpine

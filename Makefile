@@ -6,5 +6,5 @@ reset:
 	docker volume rm products-manager_db
 
 test:
-	docker-compose -f docker-compose.test.yaml run products_api --build
+	docker-compose -f docker-compose.test.yaml run test_products_api
 	docker-compose -f docker-compose.test.yaml stop
