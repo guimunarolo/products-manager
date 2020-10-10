@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "products-api"
+version = "0.1.0"
+description = "Simple HTTP API for list products"
+authors = ["Guilherme Munarolo <guimunarolo@hotmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.61.1"
+uvicorn = "^0.12.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
