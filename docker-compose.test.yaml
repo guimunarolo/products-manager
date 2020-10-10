@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+
+  products_api:
+    build: ./products-api
+    command: poetry run pytest
+    volumes:
+      - ./products-api:/app
