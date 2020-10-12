@@ -1,16 +1,17 @@
 import uuid
 
 import pytest
-from fastapi.testclient import TestClient
+from httpx import AsyncClient
 
 from products_api.db import db_connect, db_disconnect
 from products_api.main import app
 
 
 @pytest.fixture
-def client():
-    with TestClient(app) as client:
+async def client():
+    async with AsyncClient(app=app, base_url="http://localhost:8000") as client:
         yield client
+
 
 @pytest.fixture
 async def db_connection():
