@@ -15,6 +15,12 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:root@db:5432/products_manager
 
+  calculator_service:
+    build: ./calculator-service
+    command: /go/src/calculator-service/main
+    ports:
+      - 9000:9000
+
   db:
     image: postgres:13-alpine
     environment:

@@ -1,4 +1,4 @@
-run: setup
+run:
 	docker-compose up
 
 reset:
