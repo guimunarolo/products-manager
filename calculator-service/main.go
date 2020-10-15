@@ -6,10 +6,10 @@ import (
 	"os"
 
 	"github.com/hashicorp/go-hclog"
-	protos "github.com/guimunarolo/products-manage/calculator-service/protos/calculator"
-	"github.com/guimunarolo/products-manage/calculator-service/servers"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+	protos "github.com/guimunarolo/products-manage/calculator-service/protos/calculator"
+	"github.com/guimunarolo/products-manage/calculator-service/server"
 )
 
 func main() {

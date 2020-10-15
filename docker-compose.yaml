@@ -20,6 +20,12 @@ services:
     command: /go/src/calculator-service/main
     ports:
       - 9000:9000
+    depends_on:
+      - db
+    links:
+      - "db"
+    environment:
+      - DATABASE_URL=postgresql://postgres:root@db:5432/products_manager?sslmode=disable
 
   db:
     image: postgres:13-alpine

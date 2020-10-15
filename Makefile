@@ -17,3 +17,6 @@ rebuild:
 
 setup:
 	docker network create products_manager
+
+protos:
+	protoc -I calculator-service/protos calculator-service/protos/calculator.proto --go_out=plugins=grpc:calculator-service/protos/calculator

@@ -5,11 +5,11 @@ service Calculator {
 }
 
 message ProductDiscountRequest {
-  string product_id = 1;
-  string user_id = 2;
+  string productId = 1;
+  string userId = 2;
 }
 
 message ProductDiscountResponse {
-  float pct = 1;
-  int32 value_in_cents = 2;
+  double pct = 1;
+  int32 valueInCents = 2;
 }
