@@ -3,8 +3,7 @@ module github.com/guimunarolo/products-manage/calculator-service
 go 1.15
 
 require (
-	github.com/go-pg/pg v8.0.7+incompatible
-	github.com/go-pg/pg/v10 v10.3.2 // indirect
+	github.com/go-pg/pg/v10 v10.3.2
 	github.com/golang/protobuf v1.4.2
 	github.com/hashicorp/go-hclog v0.14.1
 	golang.org/x/net v0.0.0-20200925080053-05aa5d4ee321

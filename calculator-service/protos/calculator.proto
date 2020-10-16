@@ -1,15 +1,17 @@
 syntax = "proto3";
 
+package calculator;
+
 service Calculator {
   rpc GetProductDiscount (ProductDiscountRequest) returns (ProductDiscountResponse);
 }
 
 message ProductDiscountRequest {
-  string productId = 1;
-  string userId = 2;
+  string product_id = 1;
+  string user_id = 2;
 }
 
 message ProductDiscountResponse {
   double pct = 1;
-  int32 valueInCents = 2;
+  int32 value_in_cents = 2;
 }
