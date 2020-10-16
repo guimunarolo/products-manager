@@ -21,9 +21,19 @@ async def db_connection():
 
 
 @pytest.fixture
-def user_data():
+def user_id():
+    return str(uuid.uuid4())
+
+
+@pytest.fixture
+def product_id():
+    return str(uuid.uuid4())
+
+
+@pytest.fixture
+def user_data(user_id):
     return {
-        "id": str(uuid.uuid4()),
+        "id": user_id,
         "first_name": "Jane",
         "last_name": "Doe",
         "date_of_birth": "1999-09-09",
@@ -31,9 +41,9 @@ def user_data():
 
 
 @pytest.fixture
-def product_data():
+def product_data(product_id):
     return {
-        "id": str(uuid.uuid4()),
+        "id": product_id,
         "price_in_cents": 120000,
         "title": "Some Product",
         "description": "Some product description here.",

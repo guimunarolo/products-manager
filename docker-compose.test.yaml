@@ -9,9 +9,10 @@ services:
     depends_on:
       - test_db
     links:
-      - "test_db"
+      - test_db
     environment:
       - DATABASE_URL=postgresql://postgres:root@test_db:5432/products_manager_test
+      - CALCULATOR_URL=
 
   test_db:
     image: postgres:13-alpine
@@ -23,8 +24,3 @@ services:
       - ./initial-db-data:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
-
-networks:
-  default:
-    external:
-      name: products_manager
