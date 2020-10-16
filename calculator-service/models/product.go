@@ -26,10 +26,7 @@ func init() {
 // GetProductByID returns a *User selected by given ID
 func GetProductByID(productID string) (*Product){
     product := &Product{ID: productID}
-    err := db.Model(product).WherePK().Select()
-    if err != nil {
-        panic(err)
-    }
+    db.Model(product).WherePK().Select()
     
     return product
 }

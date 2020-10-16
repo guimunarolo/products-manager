@@ -24,10 +24,7 @@ func init() {
 // GetUserByID returns a *User selected by given ID
 func GetUserByID(userID string) (*User){
     user := &User{ID: userID}
-    err := db.Model(user).WherePK().Select()
-    if err != nil {
-        panic(err)
-    }
+    db.Model(user).WherePK().Select()
     
     return user
 }
