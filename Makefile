@@ -1,6 +1,10 @@
 run:
 	docker-compose up
 
+stop:
+	docker-compose down
+	docker-compose -f docker-compose.test.yaml down
+
 reset:
 	docker-compose down
 	docker-compose -f docker-compose.test.yaml down
@@ -15,9 +19,6 @@ test:
 build:
 	docker-compose build
 	docker-compose -f docker-compose.test.yaml build
-
-setup:
-	docker network create products_manager
 
 protos:
 	protoc -I calculator-service/calculator/protos calculator-service/calculator/protos/calculator.proto --go_out=plugins=grpc:calculator-service/calculator
