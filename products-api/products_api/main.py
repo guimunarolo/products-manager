@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI
 
 from .db import db_connect, db_disconnect
@@ -11,7 +10,7 @@ app.include_router(views_router)
 
 @app.on_event("startup")
 async def startup():
-    await db_connect()    
+    await db_connect()
 
 
 @app.on_event("shutdown")

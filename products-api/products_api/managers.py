@@ -30,7 +30,8 @@ class ProductManager:
         for product in await cls.get_all():
             product = dict(product)
             product["discount"] = calculator_client.get_product_discount(
-                user_id=user_id, product_id=str(product["id"]),
+                user_id=user_id,
+                product_id=str(product["id"]),
             )
             products.append(product)
 

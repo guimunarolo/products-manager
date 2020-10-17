@@ -15,7 +15,8 @@ class TestCalculatorClient:
         client.stub.GetProductDiscount = mock.Mock(side_effect=RpcError)
 
         expected_request = calculator_pb2.ProductDiscountRequest(
-            user_id=user_id, product_id=product_id,
+            user_id=user_id,
+            product_id=product_id,
         )
 
         assert client.get_product_discount(user_id, product_id) == {}
@@ -28,7 +29,8 @@ class TestCalculatorClient:
         client.stub.GetProductDiscount = mock.Mock(return_value=response)
 
         expected_request = calculator_pb2.ProductDiscountRequest(
-            user_id=user_id, product_id=product_id,
+            user_id=user_id,
+            product_id=product_id,
         )
         expected_response = {"pct": response.pct, "value_in_cents": response.value_in_cents}
 
