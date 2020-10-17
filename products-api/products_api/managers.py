@@ -1,3 +1,4 @@
+from .clients import CalculatorClient
 from .db import database
 
 
@@ -21,3 +22,16 @@ class ProductManager:
         cls._validate_required_fields(data)
         query = f"INSERT INTO {cls.table}(price_in_cents, title, description) VALUES (:price_in_cents, :title, :description)"
         return await database.execute(query=query, values=data)
+
+    @classmethod
+    async def get_all_with_discount(cls, user_id):
+        calculator_client = CalculatorClient()
+        products = []
+        for product in await cls.get_all():
+            product = dict(product)
+            product["discount"] = calculator_client.get_product_discount(
+                user_id=user_id, product_id=str(product["id"]),
+            )
+            products.append(product)
+
+        return products
