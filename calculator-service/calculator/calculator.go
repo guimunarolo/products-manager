@@ -13,6 +13,8 @@ const (
 	initialDiscountPercentage = 0.0
 )
 
+var now = time.Now
+
 type Calculator struct {
 	logger            hclog.Logger
 	userRepository    UserRespository
@@ -54,7 +56,7 @@ func (calc *Calculator) GetProductDiscount(ctx context.Context, pdr *ProductDisc
 
 func getDiscountPercentage(u *User) float64 {
 	pct := initialDiscountPercentage
-	today := time.Now()
+	today := now()
 
 	if today.Day() == blackFridayDay && today.Month() == blackFridayMonth {
 		pct += 0.10

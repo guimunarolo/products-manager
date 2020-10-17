@@ -14,6 +14,10 @@ services:
       - DATABASE_URL=postgresql://postgres:root@test_db:5432/products_manager_test
       - CALCULATOR_URL=
 
+  test_calculator_service:
+    build: ./calculator-service
+    command: go test -v ./calculator
+
   test_db:
     image: postgres:13-alpine
     environment:

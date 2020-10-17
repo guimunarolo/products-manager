@@ -9,6 +9,7 @@ reset:
 
 test:
 	docker-compose -f docker-compose.test.yaml run --rm test_products_api
+	docker-compose -f docker-compose.test.yaml run --rm test_calculator_service
 	docker-compose -f docker-compose.test.yaml stop
 
 build:
