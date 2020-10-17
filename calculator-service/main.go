@@ -7,26 +7,43 @@ import (
 
 	"github.com/hashicorp/go-hclog"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
-	protos "github.com/guimunarolo/products-manage/calculator-service/protos/calculator"
-	"github.com/guimunarolo/products-manage/calculator-service/server"
+	"github.com/go-pg/pg/v10"
+	
+	"github.com/guimunarolo/products-manage/calculator-service/calculator"
 )
 
 func main() {
-	log := hclog.Default()
-	gs := grpc.NewServer()
-	c := server.NewCalculator(log)
+	logger := hclog.Default()
 
-	protos.RegisterCalculatorServer(gs, c)
-	reflection.Register(gs)
+	var db *pg.DB
+	{
+		opt, err := pg.ParseURL(os.Getenv("DATABASE_URL"))
+		if err != nil{
+			logger.Error("Unable to parse db url", "error", err)
+			os.Exit(-1)
+		}
+
+		db = pg.Connect(opt)
+	}
+
+	var calc *calculator.Calculator
+	{
+		urep := calculator.NewUserRepo(db, logger)
+		prep := calculator.NewProductRepo(db, logger)
+
+		calc = calculator.NewCalculator(logger, urep, prep)
+	}
+
+	server := grpc.NewServer()
+	calculator.RegisterCalculatorServer(server, calc)
 
 	port := 9000
 	l, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
-		log.Error("Unable to create listener", "error", err)
-		os.Exit(1)
+		logger.Error("Unable to create listener", "error", err)
+		os.Exit(-1)
 	}
 
-	log.Info("gRPC Server running", "port", port)
-	gs.Serve(l)
+	logger.Info("gRPC Server running", "port", port)
+	server.Serve(l)
 }
